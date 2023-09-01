@@ -18,7 +18,7 @@ impl<'de> Deserialize<'de> for Cars {
 
         // Iterate over the HashMap and set the name for each car based on its key
         for (key, mut car) in data.iter_mut() {
-            car.name = Some(key.clone());
+            car.name = key.clone();
         }
 
         Ok(Cars { data })
@@ -35,7 +35,8 @@ struct Toys {
 
 #[derive(Debug, Deserialize)]
 struct Car {
-    name: Option<String>,  // Make the name field optional
+    #[serde(default)]
+    name: String,  // Set the default value for the name field
     color: String,
     speed: u8,
 }
